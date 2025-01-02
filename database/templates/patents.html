@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} All Patents {% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1 class="mb-4">All Patents</h1>
+  <table class="table table-bordered">
+    <thead class="thead-light">
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Valid</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for patent in patents %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <!-- js trigger  -->
+          <span class="patent-title" style="cursor: pointer; color: #007bff;" data-patent-id="{{ patent.id }}">
+            {{ patent.title }}
+          </span>
+        </td>
+        <td>{{ patent.valid|yesno:"Yes,No" }}</td>
+      </tr>
+      
+      <!-- detail row -->
+      <tr id="details-{{ patent.id }}" class="patent-details" style="display: none;">
+        <td colspan="3">
+          <div>
+            <strong>Application Number:</strong> {{ patent.application_number }}<br>
+            <strong>Description:</strong> {{ patent.description }} 
+          </div>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="3" class="text-center">No patents found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+
+{% block extrascripts %}
+<script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+{% endblock %}

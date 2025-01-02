@@ -60,3 +60,9 @@ $python manage.py migrate
 $python manage.py createsuperuser
 #### run locally
  §python manage.py runserver
+
+
+Login Superuser
+
+username: "admin"
+psw: "admin"
